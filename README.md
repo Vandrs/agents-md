@@ -25,4 +25,4 @@ Each file documents an agent's purpose, responsibilities, and operational rules
 3. Open a PR with a short description, usage examples, and a QA checklist.
 
 ## License
-This repository is available under the MIT License — see `LICENSE` for details.
+This repository is available under the MIT License.
