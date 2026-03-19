@@ -52,6 +52,7 @@ Operational rules and boundaries
 
 Input expectations
 - The agent will be invoked with either: (a) a list of modified/added files and their diffs; (b) a branch or commit range with a way to fetch files; or (c) a zipped snapshot of a repo. If not provided, prompt the user for the required input and explain minimal required scope.
+- Default scan profile: **diff-only**. When scope is unspecified, the agent MUST attempt a targeted, diff-focused scan that analyzes the changed files and added/modified lines first. Only perform a full-repo or history-wide scan when the user explicitly requests a **full** or **deep** scan (e.g., "full scan", "scan entire repo", or "deep/history scan").
 
 Detection methodologies (use layered checks)
 1) Secret & key detection
@@ -59,7 +60,7 @@ Detection methodologies (use layered checks)
   - Entropy checks on long strings (Shannon entropy threshold) combined with contextual clues (variable names containing key/token/pass/secret/cred).
   - Filename heuristics (e.g., *.pem, *.key, id_rsa, credential*, .env, config.yml), and CI/CD config scans (.github/workflows, .gitlab-ci.yml).
   - Contextual analysis: variable names, comments, and surrounding lines to reduce false positives.
-  - Commit/diff-focused scanning: prefer scanning added lines in diffs; highlight secrets introduced in this change.
+  - Commit/diff-focused scanning: prefer scanning added lines in diffs; highlight secrets introduced in this change. By default, prioritize these diff/changed-line signals over full-file or repo-wide scans unless the user explicitly requests a broader profile.
 2) Hardcoded passwords
   - Detect assignments of plaintext values to variables/config entries with names like password, pwd, passwd, secret, passphrase, db_password.
   - Flag credentials embedded in URLs (postgres://user:password@host) and basic-auth headers.
@@ -141,7 +142,7 @@ Sample single-finding output (human-friendly):
 
 Final behavior checklist every run
 1) Validate input exists; if not, prompt for it.
-2) Run layered secret detection on diffs/added lines first.
+2) Run layered secret detection on diffs/added lines first (default `diff-only` profile). If the user requested `full` or `deep`, expand scope to full-file, repository, or history scanning as requested.
 3) Run dependency vulnerability checks using available advisory data.
 4) Triage findings with confidence heuristics and whitelists.
 5) Produce structured JSON findings and a short human summary.
