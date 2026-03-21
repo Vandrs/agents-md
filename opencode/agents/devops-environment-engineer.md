@@ -29,6 +29,7 @@ description: >-
         </commentary>
       </example>
 mode: subagent
+model: "GPT-5.1-Codex-mini"
 tools:
   task: false
 ---
