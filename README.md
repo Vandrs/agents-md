@@ -9,15 +9,24 @@ Each file documents an agent's purpose, responsibilities, and operational rules
 (frontmatter + human-readable guidance).
 
 ## Agents included
-- `agents/staff-engineer-orchestrator.md` — Staff-level orchestrator: intake, decompose, delegate.
-- `agents/senior-software-engineer.md` — Senior engineer: implement, review, refactor with SOLID/Clean Architecture practices.
-- `agents/security-code-auditor.md` — Security auditor: detect secrets and dependency vulnerabilities.
-- `agents/architecture-doc-author.md` — Architecture author: design docs, mermaid diagrams, migration plans.
-- `agents/devops-environment-engineer.md` — DevOps engineer: Docker/Containerfile, CI/CD, Kubernetes manifests (delegates container specs to security auditor).
 
-## How to use
-- Read the corresponding file in `agents/` to understand an agent's expected inputs, outputs, and operational rules.
-- These files serve as blueprints for tools or bots that instantiate agents/skills.
+### Opencode 
+
+- [staff-engineer-orchestrator.md](./opencode/agents/staff-engineer-orchestrator.md) — Staff-level orchestrator: intake, decompose, delegate.
+- [senior-software-engineer.md](./opencode/agents/senior-software-engineer.md) — Senior engineer: implement, review, refactor with SOLID/Clean Architecture practices.
+- [security-code-auditor.md](./opencode/agents/security-code-auditor.md) — Security auditor: detect secrets and dependency vulnerabilities.
+- [architecture-doc-author.md](./opencode/agents/architecture-doc-author.md) — Architecture author: design docs, mermaid diagrams, migration plans.
+- [devops-environment-engineer.md](./opencode/agents/devops-environment-engineer.md) — DevOps engineer: Docker/Containerfile, CI/CD, Kubernetes manifests (delegates container specs to security auditor).
+
+#### How to use
+- Clone this repositoryx 
+- Make a symlink from opencode expected agent directory to the `opencode/agents/` folder in this repo. For example, if your opencode expects agents in `~/.config/opencode/agent`, run:
+
+  ```bash
+  ln -s path/to/this-repo/opencode/agents ~/.config/opencode/agent
+  ```
+
+
 
 ## Contributing
 1. Create a branch: `git checkout -b feat/add-my-agent`.
