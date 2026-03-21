@@ -29,7 +29,7 @@ description: >-
         </commentary>
       </example>
 mode: subagent
-model: "GPT-5.1-Codex-mini"
+model: "github-copilot/gpt-5.1-codex-mini"
 tools:
   task: false
 ---
