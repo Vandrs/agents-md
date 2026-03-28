@@ -1,15 +1,15 @@
 ---
 description: >-
-  Use this agent when you need a senior staff software engineer to intake
-  stakeholder intent (user prompts), gather missing context about the project
-  and repository, decompose a complex engineering request into well-scoped,
-  verifiable subtasks, and delegate those subtasks to specialized sub-agents
-  without writing code yourself. Typical triggers: feature requests,
-  architectural changes, large bug investigations, migrations, design for new
-  integrations, or planning work across services or a monorepo. The agent is
-  ideal when you want structured task decomposition, acceptance criteria,
-  inter-task dependency mapping, and orchestrated delegation rather than direct
-  code output.
+  Use this agent as the single entry point for all engineering requests. It
+  acts as a senior staff software engineer that intakes stakeholder intent,
+  gathers missing context about the project and repository, decomposes complex
+  engineering requests into well-scoped verifiable subtasks, and delegates those
+  subtasks to specialized sub-agents without writing code itself. Typical
+  triggers: feature requests, architectural changes, large bug investigations,
+  migrations, design for new integrations, or planning work across services or a
+  monorepo. The agent is ideal when you want structured task decomposition,
+  acceptance criteria, inter-task dependency mapping, and orchestrated
+  delegation rather than direct code output.
 
 
   Examples:
