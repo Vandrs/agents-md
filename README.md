@@ -8,18 +8,50 @@ Collection of agent specifications in Markdown under the `agents/` folder.
 Each file documents an agent's purpose, responsibilities, and operational rules
 (frontmatter + human-readable guidance).
 
+## Architecture
+
+The system follows a **delegation-first** pattern: one orchestrator agent receives all incoming requests, decomposes them into subtasks, and delegates each subtask to the most appropriate specialist. The orchestrator **never** executes implementation tasks — it only produces coordination artifacts (plans, task breakdowns, status summaries). It performs work directly only when no specialist agent covers the task category.
+
+Some specialists also delegate to each other. Both the senior software engineer and the DevOps engineer **must** route their outputs through the security auditor before finalizing.
+
+```mermaid
+flowchart TD
+    User(["User / Stakeholder"])
+    Orch["staff-engineer-orchestrator\n(primary — delegates everything)"]
+
+    SSE["senior-software-engineer\nCode: implement, review, refactor"]
+    SCA["security-code-auditor\nSecurity: secrets, vulns, dependencies"]
+    ADA["architecture-doc-author\nDocs: design, diagrams, RFCs"]
+    DEE["devops-environment-engineer\nInfra: Docker, CI/CD, K8s"]
+    RA["research-analyst\nResearch: facts, comparisons, sources"]
+
+    User --> Orch
+    Orch --> SSE
+    Orch --> SCA
+    Orch --> ADA
+    Orch --> DEE
+    Orch --> RA
+
+    SSE -- "mandatory security gate" --> SCA
+    DEE -- "mandatory security gate" --> SCA
+```
+
 ## Agents included
 
-### Opencode 
+### Opencode
 
-- [staff-engineer-orchestrator.md](./opencode/agents/staff-engineer-orchestrator.md) — Staff-level orchestrator: intake, decompose, delegate.
-- [senior-software-engineer.md](./opencode/agents/senior-software-engineer.md) — Senior engineer: implement, review, refactor with SOLID/Clean Architecture practices.
+#### Orchestrator (primary)
+- [staff-engineer-orchestrator.md](./opencode/agents/staff-engineer-orchestrator.md) — Staff-level orchestrator: intake, decompose, delegate. Never writes code; delegates to specialists and validates their outputs.
+
+#### Specialists (sub-agents)
+- [senior-software-engineer.md](./opencode/agents/senior-software-engineer.md) — Senior engineer: implement, review, refactor with SOLID/Clean Architecture practices. Delegates to security auditor after implementation.
 - [security-code-auditor.md](./opencode/agents/security-code-auditor.md) — Security auditor: detect secrets and dependency vulnerabilities.
 - [architecture-doc-author.md](./opencode/agents/architecture-doc-author.md) — Architecture author: design docs, mermaid diagrams, migration plans.
-- [devops-environment-engineer.md](./opencode/agents/devops-environment-engineer.md) — DevOps engineer: Docker/Containerfile, CI/CD, Kubernetes manifests (delegates container specs to security auditor).
+- [devops-environment-engineer.md](./opencode/agents/devops-environment-engineer.md) — DevOps engineer: Docker/Containerfile, CI/CD, Kubernetes manifests. Delegates container specs to security auditor.
+- [research-analyst.md](./opencode/agents/research-analyst.md) — Research analyst: fact-checking, API research, technology comparisons, documentation review. Research only — does not write code.
 
 #### How to use
-- Clone this repositoryx 
+- Clone this repository
 - Make a symlink from opencode expected agent directory to the `opencode/agents/` folder in this repo. For example, if your opencode expects agents in `~/.config/opencode/agent`, run:
 
   ```bash
