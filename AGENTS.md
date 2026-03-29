@@ -19,6 +19,13 @@ One **orchestrator** receives all requests and delegates to **specialist sub-age
 
 Routing rule: delegate to the best-fit specialist. The orchestrator executes a task itself **only** when no specialist covers it **and** the task is limited to coordination artifacts (plans, summaries, dependency graphs).
 
+## Conventions for Commands
+
+- One command per file under `opencode/commands/`.
+- Every file starts with YAML frontmatter containing at minimum: `description`.
+- The prompt body must be written in English and be explicit about scope, rules, and output format.
+- Use `$ARGUMENTS` for user-supplied parameters and `!command` shell injection for dynamic context.
+
 ## Conventions for Agent Specs
 
 - One agent per file under `opencode/agents/`.

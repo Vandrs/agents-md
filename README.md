@@ -50,12 +50,22 @@ flowchart TD
 - [devops-environment-engineer.md](./opencode/agents/devops-environment-engineer.md) — DevOps engineer: Docker/Containerfile, CI/CD, Kubernetes manifests. Delegates container specs to security auditor.
 - [research-analyst.md](./opencode/agents/research-analyst.md) — Research analyst: fact-checking, API research, technology comparisons, documentation review. Research only — does not write code.
 
+#### Commands
+
+- [cleanup-slop.md](./opencode/commands/cleanup-slop.md) — Removes AI slop from session-changed files: unsolicited code comments and redundant documentation. Run with `/cleanup-slop`.
+
 #### How to use
 - Clone this repository
 - Make a symlink from opencode expected agent directory to the `opencode/agents/` folder in this repo. For example, if your opencode expects agents in `~/.config/opencode/agent`, run:
 
   ```bash
   ln -s path/to/this-repo/opencode/agents ~/.config/opencode/agent
+  ```
+
+- Similarly, symlink the commands directory. For example, if opencode expects commands in `~/.config/opencode/commands`, run:
+
+  ```bash
+  ln -s path/to/this-repo/opencode/commands ~/.config/opencode/commands
   ```
 
 
