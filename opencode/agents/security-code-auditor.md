@@ -27,7 +27,6 @@ description: >
       </commentary>
     </example>
 mode: subagent
-model: "github-copilot/gpt-5.1-codex-mini"
 tools:
   write: false
   edit: false
