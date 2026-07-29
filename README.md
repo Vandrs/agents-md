@@ -68,6 +68,37 @@ flowchart TD
   ln -s path/to/this-repo/opencode/commands ~/.config/opencode/commands
   ```
 
+### Claude Code
+
+The same 5 specialists + orchestrator + `cleanup-slop` command are mirrored for [Claude Code](https://claude.com/claude-code) under `claude/agents/` and `claude/commands/`. Frontmatter and delegation mechanics differ from opencode (see [AGENTS.md](./AGENTS.md#conventions-for-claude-code-agent-specs)); the persona, rules, and output format of each agent are kept equivalent.
+
+#### Agents
+- [staff-engineer-orchestrator.md](./claude/agents/staff-engineer-orchestrator.md) — Orchestrator: intake, decompose, delegate. Same registry/routing rules as the opencode version; falls back to returning the delegation plan if the Agent tool isn't available in its execution context.
+- [senior-software-engineer.md](./claude/agents/senior-software-engineer.md) — Same as opencode; mandatory security delegation includes a fallback note if the Agent tool can't be called directly.
+- [security-code-auditor.md](./claude/agents/security-code-auditor.md) — Same as opencode.
+- [architecture-doc-author.md](./claude/agents/architecture-doc-author.md) — Same as opencode.
+- [devops-environment-engineer.md](./claude/agents/devops-environment-engineer.md) — Same as opencode; same security-delegation fallback note.
+- [research-analyst.md](./claude/agents/research-analyst.md) — Same as opencode.
+
+#### Commands
+- [cleanup-slop.md](./claude/commands/cleanup-slop.md) — Same behavior as the opencode version. Run with `/cleanup-slop`.
+
+#### How to use
+- Clone this repository (if not already done for the opencode setup above).
+- Symlink the agents directory so Claude Code picks these up globally, in any project:
+
+  ```bash
+  ln -s path/to/this-repo/claude/agents ~/.claude/agents
+  ```
+
+- Symlink the commands directory:
+
+  ```bash
+  ln -s path/to/this-repo/claude/commands ~/.claude/commands
+  ```
+
+- Alternatively, for project-local use only, symlink (or copy) `claude/agents` and `claude/commands` into that project's `.claude/agents` and `.claude/commands`.
+
 
 
 ## Contributing
